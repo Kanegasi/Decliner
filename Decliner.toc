@@ -1,0 +1,33 @@
+﻿## Interface: 80000
+## Title: Decliner
+## Notes: Automatically declines common player interactions
+## Notes-deDE: lehnt automatisch gemeinsame Interaktion der Spieler
+## Notes-esES: disminuye automáticamente interacciones comunes jugador
+## Notes-esMX: disminuye automáticamente interacciones comunes jugador
+## Notes-frFR: diminue automatiquement les interactions des joueurs communs
+## Notes-itIT: declina automaticamente interazioni comuni giocatore
+## Notes-koKR: 자동으로 일반 플레이어의 상호 작용을 감소
+## Notes-ptBR: declina automaticamente interações comuns jogador
+## Notes-ptPT: declina automaticamente interações comuns jogador
+## Notes-ruRU: Автоматически снижается общие взаимодействия игрока
+## Notes-zhCN: 自动拒绝普通玩家互动
+## Notes-zhTW: 自動拒絕普通玩家互動
+## Version: 8.0.1.180722.1
+## Author: Kanegasi
+## SavedVariables: declinerlog,declinerhistory,Decliner_SV
+
+i18n\enUS.lua
+i18n\deDE.lua
+i18n\esES.lua
+i18n\esMX.lua
+i18n\frFR.lua
+i18n\itIT.lua
+i18n\koKR.lua
+i18n\ptBR.lua
+i18n\ptPT.lua
+i18n\ruRU.lua
+i18n\zhCN.lua
+i18n\zhTW.lua
+
+soundnames.lua
+dclcore.lua
