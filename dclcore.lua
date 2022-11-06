@@ -139,8 +139,8 @@ local upper=string.upper
  -- localize Blizzard functions
 
 local After=C_Timer.After
-local BNGetFriendGameAccountInfo=BNGetFriendGameAccountInfo
-local BNGetNumFriendGameAccounts=BNGetNumFriendGameAccounts
+local BNGetFriendGameAccountInfo=C_BattleNet.GetFriendGameAccountInfo
+local BNGetNumFriendGameAccounts=C_BattleNet.GetFriendNumGameAccounts
 local BNGetNumFriends=BNGetNumFriends
 local CancelDuel=CancelDuel
 local CancelPetDuel=C_PetBattles.CancelPVPDuel
@@ -153,7 +153,7 @@ local DeclineGroup=DeclineGroup
 local DeclineGuild=DeclineGuild
 local GetFriendInfo=GetFriendInfo
 local GetGuildRosterInfo=GetGuildRosterInfo
-local GetNumFriends=GetNumFriends
+local GetNumFriends=C_FriendList.GetNumFriends
 local GetNumGroupMembers=GetNumGroupMembers
 local GetNumGuildMembers=GetNumGuildMembers
 local GetPetitionInfo=GetPetitionInfo
@@ -716,7 +716,7 @@ function e.PLAYER_LOGIN()
 	hooksecurefunc('PlaySound',f.silence)
 	ChatFrame_AddMessageEventFilter('CHAT_MSG_SYSTEM',f.system)
 	ChatFrame_AddMessageEventFilter('CHAT_MSG_WHISPER',f.whisper)
-	InterfaceOptionsFrame:HookScript('OnHide',function()
+	SettingsPanel:HookScript('OnHide',function()
 		p.OIbutton2:UnlockHighlight() p.OIdrop:Hide()
 		p.OIbutton2:SetNormalFontObject('GameFontNormalSmall')
 		if d.cancel then f.options('c') f.register() end -- stupid taints
@@ -743,7 +743,7 @@ function e.PLAYER_LOGOUT()
 end
 
 function e.LOADING_SCREEN_DISABLED()
-	GuildRoster() ShowFriends() e.BN_FRIEND_INFO_CHANGED() e.GROUP_ROSTER_UPDATE()
+	C_GuildInfo.GuildRoster() C_FriendList.ShowFriends() e.BN_FRIEND_INFO_CHANGED() e.GROUP_ROSTER_UPDATE()
 end -- force refresh guild, friends, bnet, and group on login and load screens
 
 function e.BN_FRIEND_INFO_CHANGED(id,online,name,client,realm)
@@ -1143,7 +1143,7 @@ function f.create(obj,arg1,arg2,arg3,arg4,arg5,arg6,arg7,n,supported)
 			obj=CreateFrame('CheckButton',n,p.OIdrop,'UIRadioButtonTemplate')
 			obj:SetPoint('TOPLEFT',p.OIdrop,'TOPLEFT',arg1,arg2)
 		else
-			obj=CreateFrame('CheckButton',n,DCLPanel,'OptionsCheckButtonTemplate')
+			obj=CreateFrame('CheckButton',n,DCLPanel,'OptionsBaseCheckButtonTemplate')
 			obj.tooltipText=arg3 arg7=arg6 and -2 or -8
 			obj:SetCheckedTexture(d.file[arg4])
 			obj:SetDisabledCheckedTexture(d.file[arg4])
@@ -1406,7 +1406,7 @@ function f.panel()
 		GameTooltip:Hide()
 	end)
 
-	p.OIdrop=CreateFrame('Frame',a..'OpenInvDropDown',DCLPanel)
+	p.OIdrop=CreateFrame('Frame',a..'OpenInvDropDown',DCLPanel,"BackdropTemplate")
 	p.OIdrop:SetBackdrop({
 		bgFile='Interface\\Tooltips\\UI-Tooltip-Background',
 		edgeFile='Interface\\Tooltips\\UI-Tooltip-Border',
@@ -1427,7 +1427,7 @@ function f.panel()
 	end
 	p.OIdrop:SetSize(d.mcw+40,104) p.OIdrop:Hide()
 
-	p.OIback=CreateFrame('Frame',a..'OpenInvBackdrop',DCLPanel)
+	p.OIback=CreateFrame('Frame',a..'OpenInvBackdrop',DCLPanel,"BackdropTemplate")
 	p.OIback:SetPoint('TOPRIGHT',p.OIinput,'TOPLEFT',-24,0)
 	p.OIback:SetPoint('BOTTOMLEFT',p.OIbutton2,'BOTTOMLEFT',-119,0)
 	p.OIback:SetBackdrop({
